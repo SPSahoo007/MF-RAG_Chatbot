@@ -1,0 +1,47 @@
+"""
+Phase 5: User Interface (Custom HTML/JS + Flask API)
+=====================================================
+Flask backend serving the custom Mutual Fund FAQ Assistant UI.
+
+Endpoints:
+- / : Serves the index.html frontend.
+- /api/chat : Accepts POST requests with user query, returns RAG JSON.
+"""
+
+import os
+import sys
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
+
+# Add src/ to path so we can import rag_engine
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
+from rag_engine import query_rag
+
+app = Flask(__name__)
+CORS(app)  # Allow frontend to make requests
+
+@app.route("/")
+def index():
+    """Serve the main frontend UI."""
+    return render_template("index.html")
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    """
+    Handle chat queries from the frontend.
+    Expects JSON: {"query": "User's question"}
+    Returns JSON: {"answer": "...", "source_url": "...", "is_refused": bool, "footer": "..."}
+    """
+    data = request.get_json()
+    if not data or "query" not in data:
+        return jsonify({"error": "Missing 'query' field in request body."}), 400
+    
+    user_query = data["query"]
+    
+    # Process through the RAG engine
+    result = query_rag(user_query)
+    
+    return jsonify(result)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001, debug=True)
