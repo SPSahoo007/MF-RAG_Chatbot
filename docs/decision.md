@@ -32,12 +32,12 @@ This document records the major architectural, product, and technical decisions 
 
 ---
 
-## 4. GitHub Actions over Vercel Cron for Daily Data Ingestion
-**Decision:** We chose to use a daily GitHub Actions workflow to run our scraping/embedding pipeline instead of Vercel Serverless Cron jobs.
+## 4. GitHub Actions over Native Cloud Cron for Daily Data Ingestion
+**Decision:** We chose to use a daily GitHub Actions workflow to run our scraping/embedding pipeline instead of cloud-native Cron jobs (like Render Cron).
 **Evaluation:**
-- Vercel is fantastic for hosting, but it utilizes an *ephemeral* (read-only) filesystem. If a Vercel Cron Job ran our scraper, it would generate the new SQLite `chroma_db`, but the DB would be instantly deleted when the serverless function spun down.
+- Render and Vercel are fantastic for hosting, but their free tiers utilize *ephemeral* (read-only or temporary) filesystems. If a cloud Cron Job ran our scraper, it would generate the new SQLite `chroma_db`, but the DB would be deleted when the instance spun down or restarted.
 - Using a managed cloud vector database (like Pinecone) would solve this, but introduced unnecessary monthly costs for a V1 product.
-**Why:** By shifting the daily cron job to **GitHub Actions**, the runner executes the pipeline, updates the local database, and *commits the database directly to the main branch*. This commit instantly triggers a Vercel redeployment with the fresh data baked in. It was a clever, zero-cost architectural hack to bypass ephemeral storage limitations.
+**Why:** By shifting the daily cron job to **GitHub Actions**, the runner executes the pipeline, updates the local database, and *commits the database directly to the main branch*. This commit instantly triggers a Render redeployment with the fresh data baked in. It was a clever, zero-cost architectural hack to bypass ephemeral storage limitations and avoid paying for a managed database.
 
 ---
 
