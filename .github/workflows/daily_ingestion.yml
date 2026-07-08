@@ -31,7 +31,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Scraper (Phase 2.1)
-        run: python src/scraper.py
+        run: python src/ingestion.py
 
       - name: Run Markdown Chunker (Phase 2.2)
         run: python src/chunking.py
