@@ -7,7 +7,7 @@ This project features a modern, minimalist glassmorphism UI and a robust Flask b
 ## 🌟 Features
 - **Facts-Only Guardrails**: The LLM refuses to provide speculative investment advice or performance predictions.
 - **Automated Data Pipeline**: A GitHub Actions workflow runs every day at 10:30 IST to scrape the latest NAVs and Expense Ratios, update the vector database, and commit the fresh data.
-- **Hugging Face Spaces Optimized**: Fully containerized with a Dockerfile for seamless, free deployment on Hugging Face Spaces (16GB RAM).
+- **Render Optimized**: Fully configured for seamless, free deployment on Render.com with a native GitHub integration.
 - **Multi-Chat UI**: Dynamic local storage chat history and conversation threading.
 
 ## 🛠️ Architecture
@@ -52,13 +52,14 @@ python app.py
 ```
 Then navigate to `http://127.0.0.1:7860` in your browser.
 
-## ☁️ Cloud Deployment (Hugging Face Spaces)
-Because the Machine Learning libraries (`sentence-transformers`, `torch`) exceed standard serverless limits (like Vercel's 250MB limit), this app is heavily optimized for **Hugging Face Spaces**.
-1. Create a new Space on [Hugging Face](https://huggingface.co/).
-2. Select **Docker** as the SDK.
-3. Link this GitHub repository.
-4. Add your `GROQ_API_KEY` to the Space Secrets.
-5. Hugging Face will automatically build and deploy the container!
+## ☁️ Cloud Deployment (Render.com)
+Because the Machine Learning libraries (`sentence-transformers`, `torch`) exceed standard serverless limits (like Vercel's 250MB limit), this app is heavily optimized for a standard web server on **Render.com**.
+1. Create a free account on [Render](https://render.com/).
+2. Click **New +** and select **Web Service**.
+3. Connect your GitHub account and select this repository.
+4. Set the Start Command to: `gunicorn app:app`
+5. Add your `GROQ_API_KEY` to the Environment Variables.
+6. Click **Deploy Web Service**!
 ## ⚠️ Disclaimer
 This tool is for educational purposes only. It is strictly built to demonstrate Retrieval-Augmented Generation (RAG) techniques and does not constitute financial advice. Always consult a registered financial advisor before making investment decisions.
 
