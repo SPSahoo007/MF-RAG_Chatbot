@@ -39,6 +39,67 @@ This assistant is designed to answer factual queries regarding the following **5
 
 ---
 
+## 📋 Source List (URLs Used)
+
+| # | Fund Name | Source URL |
+|---|-----------|-----------|
+| 1 | Bandhan Small Cap Fund | https://groww.in/mutual-funds/bandhan-small-cap-fund-direct-growth |
+| 2 | Parag Parikh Long Term Value Fund | https://groww.in/mutual-funds/parag-parikh-long-term-value-fund-direct-growth |
+| 3 | HDFC Mid-Cap Opportunities Fund | https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth |
+| 4 | HDFC Flexi Cap Fund | https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth |
+| 5 | Nippon India Large Cap Fund | https://groww.in/mutual-funds/nippon-india-large-cap-fund-direct-growth |
+
+---
+
+## 💬 Sample Q&A
+
+Sample queries showcasing the assistant's ability to extract facts with accurate citations, while strictly refusing advisory or speculative questions with polite safe-refusals.
+
+### Factual Queries (Answered)
+
+**Q: What is the expense ratio of HDFC Flexi Cap Fund?**
+> **A:** The expense ratio of the HDFC Flexi Cap Fund is 0.77% for the Direct Plan.
+> 
+> Source: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+> _Last updated from sources: 2026-07-11_
+
+**Q: Who is the fund manager of Bandhan Small Cap Fund?**
+> **A:** The fund manager for the Bandhan Small Cap Fund is Mr. Manish Gunwani.
+> 
+> Source: https://groww.in/mutual-funds/bandhan-small-cap-fund-direct-growth
+> _Last updated from sources: 2026-07-11_
+
+**Q: What is the minimum SIP amount for Nippon India Large Cap Fund?**
+> **A:** The minimum SIP investment for the Nippon India Large Cap Fund is ₹100.
+> 
+> Source: https://groww.in/mutual-funds/nippon-india-large-cap-fund-direct-growth
+> _Last updated from sources: 2026-07-11_
+
+**Q: Is there a lock-in period for Parag Parikh Long Term Value Fund?**
+> **A:** No, there is no lock-in period for the Parag Parikh Long Term Value Fund (Flexi Cap Fund).
+> 
+> Source: https://groww.in/mutual-funds/parag-parikh-long-term-value-fund-direct-growth
+> _Last updated from sources: 2026-07-11_
+
+### Advisory & Speculative Queries (Safely Refused)
+
+**Q: Should I invest in HDFC Mid-Cap Opportunities Fund?**
+> **A:** I'm a facts-only assistant and cannot provide investment advice, opinions, or recommendations. For guidance on investing, please consult a SEBI-registered investment advisor or visit:
+> - AMFI: https://www.amfiindia.com/investor-corner/knowledge-center.html
+> - SEBI Investor Education: https://investor.sebi.gov.in/
+
+**Q: Which fund is better, HDFC Flexi Cap or Nippon India Large Cap?**
+> **A:** I'm a facts-only assistant and cannot provide investment advice, opinions, or recommendations. For guidance on investing, please consult a SEBI-registered investment advisor or visit:
+> - AMFI: https://www.amfiindia.com/investor-corner/knowledge-center.html
+> - SEBI Investor Education: https://investor.sebi.gov.in/
+
+**Q: Will small cap funds give me 20% returns next year?**
+> **A:** I'm a facts-only assistant and cannot provide investment advice, opinions, or recommendations. For guidance on investing, please consult a SEBI-registered investment advisor or visit:
+> - AMFI: https://www.amfiindia.com/investor-corner/knowledge-center.html
+> - SEBI Investor Education: https://investor.sebi.gov.in/
+
+---
+
 ## 🚀 Setup & Local Deployment
 
 ### Prerequisites
@@ -87,7 +148,12 @@ This app is heavily optimized for a standard web server on **Render.com** using 
 ---
 
 ## ⚠️ Disclaimer
-This tool is for educational purposes only. It is strictly built to demonstrate Retrieval-Augmented Generation (RAG) techniques and does not constitute financial advice. Always consult a registered financial advisor before making investment decisions.
+This tool is for **educational purposes only**. It is strictly built to demonstrate Retrieval-Augmented Generation (RAG) techniques and **does not constitute financial advice**. The assistant provides factual data extracted from publicly available web pages and refuses to offer investment recommendations, performance predictions, or opinions. Always consult a SEBI-registered financial advisor before making investment decisions.
+
+**UI Disclaimer (shown to users):**
+```
+AI-GENERATED CONTENT. STRICTLY FOR EDUCATIONAL PURPOSES. CONSULT A SEBI-REGISTERED FINANCIAL ADVISOR BEFORE INVESTING.
+```
 
 ## 📄 License
 This project is licensed under the MIT License.
