@@ -39,9 +39,18 @@ def chat():
     user_query = data["query"]
     
     # Process through the RAG engine
-    result = query_rag(user_query)
-    
-    return jsonify(result)
+    try:
+        result = query_rag(user_query)
+        return jsonify(result)
+    except Exception as e:
+        error_msg = f"An unexpected error occurred with the AI providers: {str(e)}"
+        print(f"ERROR: {error_msg}")
+        return jsonify({
+            "answer": error_msg,
+            "source_url": None,
+            "is_refused": True,
+            "footer": None
+        })
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))
