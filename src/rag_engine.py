@@ -430,7 +430,14 @@ def query_rag(user_query: str) -> dict:
     if not groq_api_key:
         return format_response(
             "", [], is_refused=True,
-            refusal_message="⚠️ GROQ_API_KEY not found. Please set it in your .env file."
+            refusal_message="⚠️ GROQ_API_KEY not found. Please add it to your environment variables."
+        )
+        
+    hf_token = os.getenv("HF_TOKEN")
+    if not hf_token:
+        return format_response(
+            "", [], is_refused=True,
+            refusal_message="⚠️ HF_TOKEN not found. Please add your Hugging Face Token to the Render Environment Variables."
         )
 
     print(f"\n  Processing query: \"{user_query}\"")
