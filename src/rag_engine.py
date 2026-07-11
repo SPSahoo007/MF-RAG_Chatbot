@@ -19,7 +19,7 @@ from datetime import datetime
 from typing import Optional, Tuple
 
 from dotenv import load_dotenv
-from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_groq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -64,15 +64,10 @@ USAGE_FILE = "./usage_tracker.json"
 
 def init_embeddings():
     """
-    Initialize the Hugging Face API embedding model with the EXACT same configuration
+    Initialize the FastEmbed API embedding model with the EXACT same configuration
     used during ingestion in src/embed_and_store.py.
     """
-    hf_token = os.getenv("HF_TOKEN")
-    if not hf_token:
-        print("Warning: HF_TOKEN not found in environment. Embeddings may fail.")
-        
-    return HuggingFaceInferenceAPIEmbeddings(
-        api_key=hf_token,
+    return FastEmbedEmbeddings(
         model_name="BAAI/bge-small-en-v1.5"
     )
 
@@ -431,13 +426,6 @@ def query_rag(user_query: str) -> dict:
         return format_response(
             "", [], is_refused=True,
             refusal_message="⚠️ GROQ_API_KEY not found. Please add it to your environment variables."
-        )
-        
-    hf_token = os.getenv("HF_TOKEN")
-    if not hf_token:
-        return format_response(
-            "", [], is_refused=True,
-            refusal_message="⚠️ HF_TOKEN not found. Please add your Hugging Face Token to the Render Environment Variables."
         )
 
     print(f"\n  Processing query: \"{user_query}\"")

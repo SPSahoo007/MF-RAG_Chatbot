@@ -1,7 +1,7 @@
 import json
 import os
 import shutil
-from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 from dotenv import load_dotenv
@@ -47,16 +47,10 @@ def embed_and_store():
         
     print(f"Context enrichment complete for {len(documents)} chunks.")
     
-    # 3. Initialize the Hugging Face API embedding model
-    print("Initializing HuggingFace Inference API embedding model (BAAI/bge-small-en-v1.5)...")
-    
-    hf_token = os.environ.get("HF_TOKEN")
-    if not hf_token:
-        print("Error: HF_TOKEN not found in environment. Please add it to your .env file.")
-        return
+    # 3. Initialize the FastEmbed API embedding model
+    print("Initializing FastEmbed embedding model (BAAI/bge-small-en-v1.5)...")
         
-    embeddings = HuggingFaceInferenceAPIEmbeddings(
-        api_key=hf_token,
+    embeddings = FastEmbedEmbeddings(
         model_name="BAAI/bge-small-en-v1.5"
     )
     
