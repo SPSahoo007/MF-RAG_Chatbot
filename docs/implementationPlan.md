@@ -109,14 +109,14 @@ Creating the premium, minimalist frontend.
   - Dynamic pill badges for source citations and timestamps.
 
 ## Phase 6: Automated Data Scheduler (GitHub Actions)
-Deploying a background RAG ingestion trigger compatible with Vercel's ephemeral filesystem.
+Deploying a background RAG ingestion trigger compatible with Render's ephemeral filesystem.
 * **Component:** `.github/workflows/daily_ingestion.yml`
 * **Features:**
   - Automated cron job to run the pipeline at 10:30 IST (05:00 UTC) daily.
   - Manual `workflow_dispatch` trigger for on-demand database updates.
-  - Sequentially runs `scraper.py`, `chunking.py`, and `embed_and_store.py`.
+  - Sequentially runs `ingestion.py`, `chunking.py`, and `embed_and_store.py`.
   - Commits the updated `./chroma_db`, `./raw`, and `./processed` directories back to the `main` branch.
-  - Integrates perfectly with Vercel, triggering a fast redeployment containing the fresh database.
+  - Integrates perfectly with Render, triggering a fast redeployment containing the fresh database.
 
 ## Phase 7: Documentation & Verification
 Finalizing the project deliverables.

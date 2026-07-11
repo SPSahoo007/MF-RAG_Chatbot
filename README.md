@@ -12,7 +12,7 @@ This project features a modern, minimalist glassmorphism UI and a robust Flask b
 
 ## 🛠️ Architecture
 
-1. **Scraper (`src/scraper.py`)**: Fetches live mutual fund scheme pages.
+1. **Scraper (`src/ingestion.py`)**: Fetches live mutual fund scheme pages.
 2. **Chunker (`src/chunking.py`)**: Parses the raw HTML to Markdown, extracting key financial metrics (Expense Ratio, NAV, AUM) into high-priority metadata chunks.
 3. **Embedder (`src/embed_and_store.py`)**: Uses Langchain and HuggingFace BGE Embeddings to convert text into vectors stored in ChromaDB.
 4. **Backend (`app.py`)**: A Flask API that queries the ChromaDB and routes the context to a Groq LLM (Llama 3).
