@@ -19,7 +19,7 @@ from datetime import datetime
 from typing import Optional, Tuple
 
 from dotenv import load_dotenv
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_groq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -64,22 +64,16 @@ USAGE_FILE = "./usage_tracker.json"
 
 def init_embeddings():
     """
-    Initialize the BGE embedding model with the EXACT same configuration
+    Initialize the Hugging Face API embedding model with the EXACT same configuration
     used during ingestion in src/embed_and_store.py.
-    
-    Model: BAAI/bge-small-en-v1.5 (384 dimensions)
-    Normalization: True (cosine similarity)
-    Query instruction prefix: Required for BGE models to produce accurate query embeddings.
     """
-    model_name = "BAAI/bge-small-en-v1.5"
-    model_kwargs = {'device': 'cpu'}
-    encode_kwargs = {'normalize_embeddings': True}
-
-    return HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs=encode_kwargs,
-        query_instruction="Represent this sentence for searching relevant passages: "
+    hf_token = os.getenv("HF_TOKEN")
+    if not hf_token:
+        print("Warning: HF_TOKEN not found in environment. Embeddings may fail.")
+        
+    return HuggingFaceInferenceAPIEmbeddings(
+        api_key=hf_token,
+        model_name="BAAI/bge-small-en-v1.5"
     )
 
 

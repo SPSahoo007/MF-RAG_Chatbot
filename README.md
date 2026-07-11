@@ -40,9 +40,10 @@ This project features a modern, minimalist glassmorphism UI and a robust Flask b
    pip install -r requirements.txt
    ```
 4. Set up environment variables:
-   Copy `.env.example` to `.env` and insert your API key:
+   Copy `.env.example` to `.env` and insert your API keys:
    ```env
-   GROQ_API_KEY=gsk_your_key_here
+   GROQ_API_KEY=gsk_your_groq_key_here
+   HF_TOKEN=hf_your_huggingface_token_here
    ```
 
 ### Running the App
@@ -58,7 +59,7 @@ Because the Machine Learning libraries (`sentence-transformers`, `torch`) exceed
 2. Click **New +** and select **Web Service**.
 3. Connect your GitHub account and select this repository.
 4. Set the Start Command to: `gunicorn app:app`
-5. Add your `GROQ_API_KEY` to the Environment Variables.
+5. Add your `GROQ_API_KEY` and `HF_TOKEN` to the Environment Variables.
 6. Click **Deploy Web Service**!
 ## ⚠️ Disclaimer
 This tool is for educational purposes only. It is strictly built to demonstrate Retrieval-Augmented Generation (RAG) techniques and does not constitute financial advice. Always consult a registered financial advisor before making investment decisions.

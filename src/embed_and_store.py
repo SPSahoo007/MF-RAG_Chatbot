@@ -1,9 +1,12 @@
 import json
 import os
 import shutil
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def embed_and_store():
     print("Starting Phase 2.3: Embedding & Vector Storage...")
@@ -44,17 +47,17 @@ def embed_and_store():
         
     print(f"Context enrichment complete for {len(documents)} chunks.")
     
-    # 3. Initialize the BGE embedding model
-    print("Initializing BGE embedding model (BAAI/bge-small-en-v1.5)...")
-    model_name = "BAAI/bge-small-en-v1.5"
-    model_kwargs = {'device': 'cpu'} # Use 'cpu' by default, switch to 'cuda' or 'mps' if needed
-    encode_kwargs = {'normalize_embeddings': True} # set True to compute cosine similarity
+    # 3. Initialize the Hugging Face API embedding model
+    print("Initializing HuggingFace Inference API embedding model (BAAI/bge-small-en-v1.5)...")
     
-    embeddings = HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs=encode_kwargs,
-        query_instruction="Represent this sentence for searching relevant passages: "
+    hf_token = os.environ.get("HF_TOKEN")
+    if not hf_token:
+        print("Error: HF_TOKEN not found in environment. Please add it to your .env file.")
+        return
+        
+    embeddings = HuggingFaceInferenceAPIEmbeddings(
+        api_key=hf_token,
+        model_name="BAAI/bge-small-en-v1.5"
     )
     
     # 4. Create and persist the Chroma vector store

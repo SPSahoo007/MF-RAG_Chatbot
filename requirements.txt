@@ -7,7 +7,7 @@ pypdf
 beautifulsoup4
 python-dotenv
 requests
-sentence-transformers
+huggingface-hub
 flask
 flask-cors
 markdownify
